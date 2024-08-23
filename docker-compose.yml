@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./server # path to spring boot dockerfile
+    ports:
+      - '8080:8080'
+
+  frontend:
+    build:
+      context: ./client # path to next.js dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      NEXT_PUBLIC_SERVER_URL: http://localhost:8080/
+    depends_on:
+      - backend
